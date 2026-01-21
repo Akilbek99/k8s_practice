@@ -1,0 +1,6 @@
+        {"apiVersion":"v1","kind":"Pod","metadata":{"annotations":{},"labels":{"app":"nginx","author":"a-maxkamov","project":"k8s_practice"},"name":"nginx1","namespace":"a-maxkamov"},"spec":{"containers":[{"image":"nginx:latest","name":"nginx","ports":[{"containerPort":80}]}]}}
+      author: a-maxkamov
+    namespace: a-maxkamov
+        {"apiVersion":"v1","kind":"Pod","metadata":{"annotations":{},"labels":{"app":"nginx","author":"a-maxkamov","project":"k8s_practice"},"name":"nginx2","namespace":"a-maxkamov"},"spec":{"containers":[{"image":"nginx:latest","name":"nginx","ports":[{"containerPort":80}]}]}}
+      author: a-maxkamov
+    namespace: a-maxkamov

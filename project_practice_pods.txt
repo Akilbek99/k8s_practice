@@ -1,0 +1,12 @@
+NAMESPACE      NAME                       READY   STATUS    RESTARTS   AGE   IP              NODE            NOMINATED NODE   READINESS GATES
+i-ikromov      nginx1                     1/1     Running   0          53m   10.233.65.92    worker-node02   <none>           <none>
+i-ikromov      nginx2                     1/1     Running   0          52m   10.233.65.93    worker-node02   <none>           <none>
+m-jaloldinov   nginx1                     1/1     Running   0          77m   10.233.66.100   worker-node01   <none>           <none>
+m-jaloldinov   nginx2                     1/1     Running   0          77m   10.233.65.89    worker-node02   <none>           <none>
+u-mirzaev      flaskapp-b9b96db4f-b69v7   1/1     Running   0          30m   10.233.66.112   worker-node01   <none>           <none>
+u-mirzaev      flaskapp-b9b96db4f-bg7qx   1/1     Running   0          30m   10.233.65.98    worker-node02   <none>           <none>
+u-mirzaev      nginx1                     1/1     Running   0          60m   10.233.65.91    worker-node02   <none>           <none>
+u-mirzaev      nginx2                     1/1     Running   0          55m   10.233.66.102   worker-node01   <none>           <none>
+NAMESPACE    NAME     READY   STATUS    RESTARTS   AGE   IP              NODE            NOMINATED NODE   READINESS GATES
+a-maxkamov   nginx1   1/1     Running   0          33m   10.233.66.111   worker-node01   <none>           <none>
+a-maxkamov   nginx2   1/1     Running   0          33m   10.233.65.97    worker-node02   <none>           <none>
