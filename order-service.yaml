@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: order-service
+  labels:
+    app: order-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: order-service
+  template:
+    metadata:
+      labels:
+        app: order-service
+    spec:
+      containers:
+        - name: order-service
+          image: akilbek99/bookstore-order-svc:v1
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8000
+          env:
+            - name: BOOK_SERVICE_URL
+              value: "http://bookstore"
+            - name: MONGO_URL
+              value: "mongodb://bookstore_mongo:bookstore_mongo@77.42.19.116:27030/?authSource=admin"

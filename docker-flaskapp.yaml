@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: docker-flaskapp
+  labels:
+    project: k8s_practice 
+    author: a-maxkamov
+spec:
+  replicas: 2        
+  selector:
+    matchLabels:
+      app: docker-flaskapp
+  template:
+    metadata:
+      labels:
+        app: docker-flaskapp         
+        project: k8s_practice
+        author: a-maxkamov
+    spec:
+      containers:
+      - name: flaskapp
+        image: akilbek99/flaskapp-monitoring:v1
+        ports:
+        - containerPort: 5000

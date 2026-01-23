@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bookstore
+  labels:
+    app: bookstore
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bookstore
+  template:
+    metadata:
+      labels:
+        app: bookstore
+    spec:
+      containers:
+        - name: bookstore
+          image: akilbek99/bookstore:v1
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 5000
+          env:
+            - name: FLASK_ENV
+              value: "production"
+            - name: FLASK_DEBUG
+              value: "0"
+            - name: DATABASE_URL
+              value: "postgresql://bookstore:bookstore@77.42.19.116:5420/bookstore"
