@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flaskapp
+  labels:
+    project: k8s_practice
+    author: a-maxkamov
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: flaskapp
+  template:
+    metadata:
+      labels:
+        app: flaskapp
+        project: k8s_practice
+        author: a-maxkamov
+    spec:
+      containers:
+        - name: flaskapp
+          image: akilbek99/flaskapp-monitoring:v1
+          ports:
+            - containerPort: 5000
+          resources:
+            requests:
+              memory: "32Mi"
+              cpu: "100m"
+            limits:
+              memory: "32Mi"
+              cpu: "100m"
+          envFrom:
+            - configMapRef:
+                name: flaskapp-configs
+            - secretRef:
+                name: flaskapp-secrets
+          env:
+            - name: POD_IP
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.podIP
+            - name: NODE_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: spec.nodeName
+            - name: CPU
+              valueFrom:
+                resourceFieldRef:
+                  containerName: flaskapp
+                  resource: limits.cpu
+            - name: MEMORY
+              valueFrom:
+                resourceFieldRef:
+                  containerName: flaskapp
+                  resource: limits.memory

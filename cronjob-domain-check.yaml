@@ -1,0 +1,21 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: check-domain
+spec:
+  schedule: "*/20 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: check-domain
+              image: busybox
+              command: ["sh", "-c", "wget -q  -O- $DOMAIN"]
+              env:
+                - name: DOMAIN
+                  valueFrom:
+                    configMapKeyRef:
+                      name: check-domain
+                      key: DOMAIN
+          restartPolicy: OnFailure

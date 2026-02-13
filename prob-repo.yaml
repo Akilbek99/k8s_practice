@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: repo-1
+spec:
+  containers:
+    - name: repo-1
+      image: akilbek99/golang-repo-1:2.0.0
+      ports:
+        - containerPort: 9899
+      livenessProbe:
+        httpGet:
+          path: /health
+          port: 9899
+          httpHeaders:
+            - name: Custom-Header
+              value: Awesome
+        initialDelaySeconds: 10
+        periodSeconds: 5
+      readinessProbe:
+        httpGet:
+          path: /health
+          port: 9899
+        initialDelaySeconds: 10
+        periodSeconds: 5

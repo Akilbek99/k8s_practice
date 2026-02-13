@@ -24,4 +24,4 @@ spec:
             - name: BOOK_SERVICE_URL
               value: "http://bookstore"
             - name: MONGO_URL
-              value: "mongodb://bookstore_mongo:bookstore_mongo@77.42.19.116:27030/?authSource=admin"
+              value: "mongodb://bookstore_mongo:bookstore_mongo@mongodb:27030/?authSource=admin"

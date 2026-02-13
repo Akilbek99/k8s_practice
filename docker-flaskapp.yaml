@@ -3,22 +3,40 @@ kind: Deployment
 metadata:
   name: docker-flaskapp
   labels:
-    project: k8s_practice 
+    project: k8s_practice
     author: a-maxkamov
 spec:
-  replicas: 2        
+  replicas: 2
   selector:
     matchLabels:
       app: docker-flaskapp
   template:
     metadata:
       labels:
-        app: docker-flaskapp         
+        app: docker-flaskapp
         project: k8s_practice
         author: a-maxkamov
     spec:
       containers:
-      - name: flaskapp
-        image: akilbek99/flaskapp-monitoring:v1
-        ports:
-        - containerPort: 5000
+        - name: flaskapp
+          image: akilbek99/flaskapp-monitoring:v1
+          ports:
+            - containerPort: 5000
+          env:
+            - name: POD_IP
+              valueFrom:
+                fieldRef:
+                  apiVersion: v1
+                  fieldPath: status.podIP
+            - name: NODE_NAME
+              valueFrom:
+                fieldRef:
+                  apiVersion: v1
+                  fieldPath: spec.nodeName
+          resources:
+            limits:
+              cpu: "100m"
+              memory: "50Mi"
+            requests:
+              cpu: "100m"
+              memory: "50Mi"

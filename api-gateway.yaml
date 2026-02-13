@@ -18,18 +18,6 @@ spec:
         - name: bookstore-api-gateway
           image: akilbek99/bookstore-api-gateway:v1
           imagePullPolicy: Always
-          ports:
-            - containerPort: 8080
-          env:
-            - name: PORT
-              value: "8080"
-            - name: BOOKSTORE_SERVICE_URL
-              value: "http://bookstore"
-            - name: ORDER_SERVICE_URL
-              value: "http://order-service"
-            - name: JWT_SECRET
-              value: "qwerty123"
-            - name: TOKEN_EXPIRY
-              value: "24h"
-            - name: ALLOWED_ORIGINS
-              value: "*"
+          envFrom:
+          - configMapRef:
+              name: api-gateway-configs
