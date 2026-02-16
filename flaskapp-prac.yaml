@@ -1,0 +1,75 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flaskapp-prac
+  labels:
+    project: k8s_practice
+    author: a-makhkamov
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: flaskapp-prac
+  template:
+    metadata:
+      labels:
+        app: flaskapp-prac
+    spec:
+      containers:
+        - name: flaskapp-prac
+          image: visionindark/flask-app:prac-v1
+          ports:
+            - containerPort: 80
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "100m"
+            limits:
+              memory: "128Mi"
+              cpu: "200m"
+          livenessProbe:
+            httpGet:
+              path: /domain
+              port: 80
+              httpHeaders:
+                - name: Custom-Header
+                  value: Awesome
+            initialDelaySeconds: 10
+            periodSeconds: 5
+          readinessProbe:
+            httpGet:
+              path: /domain
+              port: 5000
+            initialDelaySeconds: 10
+            periodSeconds: 5
+          env:
+            - name: POD_IP
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.podIP
+            - name: NODE_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: spec.nodeName
+            - name: CPU
+              valueFrom:
+                resourceFieldRef:
+                  containerName: flaskapp-prac
+                  resource: limits.cpu
+            - name: MEMORY
+              valueFrom:
+                resourceFieldRef:
+                  containerName: flaskapp-prac
+                  resource: limits.memory
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: flask-prac-service
+spec:
+  selector:
+    app: flaskapp-prac
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80

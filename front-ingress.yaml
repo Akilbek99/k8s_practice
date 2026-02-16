@@ -1,12 +1,12 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: flaskapp-ingress
+  name: flask-prac
   namespace: a-makhkamov
 spec:
   ingressClassName: nginx
   rules:
-    - host: practice-akilbek.devopschoyxona.uz
+    - host: almost-last-practice-akilbek.devopschoyxona.uz
       http:
         paths:
           - path: /

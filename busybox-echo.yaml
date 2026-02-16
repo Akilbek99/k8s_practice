@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: busybox-echo
+spec:
+  containers:
+    - name: busybox
+      image: busybox:latest
+      command: ["sh", "-c", "echo $PORT $MESSAGE"]
+      env:
+        - name: PORT
+          valueFrom:
+            configMapKeyRef:
+              name: helloworld
+              key: PORT
+        - name: MESSAGE
+          valueFrom:
+            configMapKeyRef:
+              name: helloworld
+              key: MESSAGE

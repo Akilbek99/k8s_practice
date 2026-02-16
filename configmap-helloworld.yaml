@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: helloworld
+data:
+  PORT: "80"
+  MESSAGE: "Hello, World!"
